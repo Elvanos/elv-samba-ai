@@ -10,7 +10,7 @@
  * Plugin Name:       Sambla Helper
  * Plugin URI:        
  * Description:       Helps with connection to the Samba automation services
- * Version:           1.1.0
+ * Version:           1.1.1
  * Requires at least: 5.7.4
  * Requires PHP:      7.2
  * Author:            Elvanos
@@ -48,7 +48,7 @@ function runSambaHelper() {
     'pluginBaseName' => 'elv-samba-helper/elv-samba-helper.php',
     'pluginURL' => plugin_dir_url(__FILE__),
     'pluginDir' => plugin_dir_path(__FILE__),
-    'pluginVersion' => '1.1.0',
+    'pluginVersion' => '1.1.1',
     'requiredWooCommerceVersion' => '4.0.0',
   ];
 

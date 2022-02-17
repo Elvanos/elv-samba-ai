@@ -147,8 +147,10 @@ function generateXML_orders($ajaxMode = true) {
     $xmlTemp = str_replace('<ORDERS>', '', $xmlTemp);
     $xmlTemp = str_replace('</ORDERS>', '', $xmlTemp);
 
-    file_put_contents(WP_CONTENT_DIR . '/sambaHelperExport/sambaHelperOrders.xml', $xmlTemp, FILE_APPEND);
+    file_put_contents(WP_CONTENT_DIR . '/sambaHelperExport/sambaHelperOrders.xml', $xmlTemp, FILE_APPEND);]
 
+    wp_cache_flush();
+    
     $loop += 1;
   }
 

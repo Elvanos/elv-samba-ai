@@ -8,6 +8,9 @@ Elvanos Samba Helper
 
 == Changelog ==
 
+= 1.1.1 - 2022-17-02 = 
+* Fixed a RAM leak inside order generation loop
+
 = 1.1.0 - 2022-30-01 = 
 * Added analytical codes for Samba
 * Added administration for shortcodes
