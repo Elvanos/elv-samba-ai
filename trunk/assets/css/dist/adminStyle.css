@@ -1,0 +1,66 @@
+.sambaAi_title {
+  font-size: 2em !important;
+  font-weight: bold !important;
+}
+.sambaAi_subtitle {
+  font-size: 2.6em !important;
+  font-weight: bold !important;
+}
+.sambaAi_autoInput {
+  max-width: 1150px;
+  width: 100%;
+}
+.sambaAi_regenerateMessage {
+  font-size: 16px;
+  margin-left: 10px;
+  margin-top: 6px;
+  font-weight: 500;
+  display: inline-block;
+}
+.sambaAi_checkboxLabel {
+  margin-bottom: 4px;
+  display: inline-block;
+}
+.sambaAi_widgetList {
+  width: 100%;
+  border: none;
+  border-collapse: collapse;
+}
+.sambaAi_widgetList td {
+  padding: 10px;
+}
+.sambaAi_widgetList th {
+  text-align: left;
+  padding: 10px;
+}
+.sambaAi_widgetLine {
+  background-color: #fff;
+}
+.sambaAi_widgetLine:hover {
+  background-color: #f5f5f5;
+}
+.sambaAi_widgetControlTd {
+  width: 100px;
+  text-align: right;
+}
+.sambaAi_widgetAddNew {
+  text-align: right;
+  padding: 20px 10px;
+}
+.sambaAi_singleWidgetDuo {
+  width: 100%;
+  padding: 10px;
+}
+.sambaAi_singleWidgetDuo input,
+.sambaAi_singleWidgetDuo textarea {
+  width: 100%;
+}
+.sambaAi_singleWidgetDuo textarea {
+  height: 300px;
+}
+.sambaAi_singleWidgetDuo.-controlButtons {
+  text-align: right;
+}
+.sambaAi_singleWidgetDuo.-controlButtons > * {
+  margin-left: 20px;
+}
