@@ -90,7 +90,7 @@ function sambaaiprefix_updateWidget($ajaxMode = true, $widgetId = '', $name = ''
   }
 
   if (isset($_POST['content'])) {
-    $content = $_POST['content'];
+    $content = wp_kses_post($_POST['content']);
   }
 
   global $wpdb;

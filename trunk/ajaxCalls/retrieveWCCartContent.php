@@ -1,6 +1,6 @@
 <?php
 
-function retrieveWCCartContent($ajaxMode = true) {
+function sambaaiprefix_retrieveWCCartContent($ajaxMode = true) {
 
   if (!is_plugin_active('woocommerce/woocommerce.php')) {
     return;
@@ -19,7 +19,7 @@ function retrieveWCCartContent($ajaxMode = true) {
     ]);
   }
 
-  echo json_encode($products);
+  echo esc_html(json_encode($products));
 
   if ($ajaxMode) {
     die();

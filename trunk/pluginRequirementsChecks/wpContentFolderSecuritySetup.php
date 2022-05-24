@@ -1,17 +1,17 @@
 <?php
 
-function wpContentFolderSecuritySetup($forceRewrite = false, $ajaxMode = false) {
+function sambaaiprefix_wpContentFolderSecuritySetup($forceRewrite = false, $ajaxMode = false) {
 
-  checkExistingPassword($forceRewrite);
-  generateAccessFile();
-  $pass = generatePasswordFile($ajaxMode);
+  sambaaiprefix_checkExistingPassword($forceRewrite);
+  sambaaiprefix_generateAccessFile();
+  $pass = sambaaiprefix_generatePasswordFile($ajaxMode);
 
   if ($ajaxMode) {
     return $pass;
   }
 }
 
-function checkExistingPassword($forceRewrite = false) {
+function sambaaiprefix_checkExistingPassword($forceRewrite = false) {
   if (!get_option('sambaAiPrehash')) {
     add_option('sambaAiPrehash', bin2hex(openssl_random_pseudo_bytes(16)));
   } else if ($forceRewrite) {
@@ -19,7 +19,7 @@ function checkExistingPassword($forceRewrite = false) {
   }
 }
 
-function generateAccessFile() {
+function sambaaiprefix_generateAccessFile() {
   $file = fopen(WP_CONTENT_DIR . "/sambaAiExport/.htaccess", "w");
 
   fwrite($file, "# RewriteEngine on\n");
@@ -34,9 +34,9 @@ function generateAccessFile() {
   fclose($file);
 }
 
-function generatePasswordFile($ajaxMode = false) {
+function sambaaiprefix_generatePasswordFile($ajaxMode = false) {
   $pass = get_option('sambaAiPrehash');
-  $hash = generatePasswordHash($pass);
+  $hash = sambaaiprefix_generatePasswordHash($pass);
 
   $file = fopen(WP_CONTENT_DIR . "/sambaAiExport/.htpasswd", "w");
 
@@ -48,7 +48,7 @@ function generatePasswordFile($ajaxMode = false) {
   }
 }
 
-function generatePasswordHash($pass) {
+function sambaaiprefix_generatePasswordHash($pass) {
 
   // APR1-MD5 encryption method (windows compatible)
 
@@ -60,8 +60,7 @@ function generatePasswordHash($pass) {
     $text .= substr($bin, 0, min(16, $i));
   }
   for ($i = $len; $i > 0; $i >>= 1) {
-    $text .= ($i & 1) ? chr(0) : $pass{
-      0};
+    $text .= ($i & 1) ? chr(0) : $pass[0];
   }
   $bin = pack("H32", md5($text));
   for ($i = 0; $i < 1000; $i++) {

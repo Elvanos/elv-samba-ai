@@ -1,15 +1,15 @@
 <?php
 
 
-function regeneratePasswordHash() {
+function sambaaiprefix_regeneratePasswordHash() {
 
-  if (!function_exists('wpContentFolderSecuritySetup')) {
+  if (!function_exists('sambaaiprefix_wpContentFolderSecuritySetup')) {
     require_once '../pluginRequirementsChecks/wpContentFolderSecuritySetup.php';
   }
 
-  $newPass = wpContentFolderSecuritySetup(true, true);
+  $newPass = sambaaiprefix_wpContentFolderSecuritySetup(true, true);
 
-  echo $newPass;
+  echo esc_textarea($newPass);
 
   die();
 }

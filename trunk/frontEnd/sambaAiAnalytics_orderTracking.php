@@ -1,8 +1,8 @@
 <?php
 
-add_action('wp_head', 'sambaAiAnalytics_orderTracking');
+add_action('wp_enqueue_scripts', 'sambaaiprefix_sambaAiAnalytics_orderTracking');
 
-function sambaAiAnalytics_orderTracking() {
+function sambaaiprefix_sambaAiAnalytics_orderTracking() {
 
 
   if (is_wc_endpoint_url('order-received')) {
@@ -23,12 +23,12 @@ function sambaAiAnalytics_orderTracking() {
         var products = [];
         <?php foreach ($orderItems as $item) { ?>
           products.push({
-            productId: '<?= $item->get_product_id() ?>',
-            price: <?= $order->get_line_total($item, true, true) ?>
+            productId: '<?php echo esc_js($item->get_product_id()) ?>',
+            price: <?php echo esc_js(intval($order->get_line_total($item, true, true))) ?>
           });
         <?php } ?>
 
-        console.log(products)
+        //console.log(products)
 
         diffAnalytics.order({
           content: products

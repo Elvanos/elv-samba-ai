@@ -1,8 +1,8 @@
 <?php
-function sambaAiCronJob() {
+function sambaaiprefix_sambaAiCronJob() {
 
   // Register a trigger
-  add_action('sambaAi_cron_hook', 'sambaAi_cron_exec');
+  add_action('sambaAi_cron_hook', 'sambaaiprefix_sambaAi_cron_exec');
   if (!wp_next_scheduled('sambaAi_cron_hook')) {
 
     $localTimeToRun = 'midnight';
@@ -17,47 +17,47 @@ function sambaAiCronJob() {
   }
 
   // Run the XLS generator using Cron
-  function sambaAi_cron_exec() {
+  function sambaaiprefix_sambaAi_cron_exec() {
 
     // If the Customer XML generator isnt loaded
-    if (!function_exists('generateXML_customers')) {
+    if (!function_exists('sambaaiprefix_generateXML_customers')) {
       require_once plugin_dir_path(__FILE__) . '../ajaxCalls/generateXML_customers.php';
-      generateXML_customers(false);
+      sambaaiprefix_generateXML_customers(false);
     }
     // If the Customer XML generator is loaded
     else {
-      generateXML_customers(false);
+      sambaaiprefix_generateXML_customers(false);
     }
 
     // If the Orders XML generator isnt loaded
-    if (!function_exists('generateXML_orders')) {
+    if (!function_exists('sambaaiprefix_generateXML_orders')) {
       require_once plugin_dir_path(__FILE__) . '../ajaxCalls/generateXML_orders.php';
-      generateXML_orders(false);
+      sambaaiprefix_generateXML_orders(false);
     }
     // If the Orders XML generator is loaded
     else {
-      generateXML_orders(false);
+      sambaaiprefix_generateXML_orders(false);
     }
 
     // If the Products XML generator isnt loaded
-    if (!function_exists('generateXML_products')) {
+    if (!function_exists('sambaaiprefix_generateXML_products')) {
       require_once plugin_dir_path(__FILE__) . '../ajaxCalls/generateXML_products.php';
-      generateXML_products(false);
+      sambaaiprefix_generateXML_products(false);
     }
     // If the Products XML generator is loaded
     else {
-      generateXML_products(false);
+      sambaaiprefix_generateXML_products(false);
     }
 
     // If the Product categories XML generator isnt loaded
-    if (!function_exists('generateXML_productCategories')) {
+    if (!function_exists('sambaaiprefix_generateXML_productCategories')) {
       require_once plugin_dir_path(__FILE__) . '../ajaxCalls/generateXML_productCategories.php';
-      generateXML_productCategories(false);
+      sambaaiprefix_generateXML_productCategories(false);
     }
     // If the Product categories XML generator is loaded
     else {
-      generateXML_productCategories(false);
+      sambaaiprefix_generateXML_productCategories(false);
     }
   }
 }
-sambaAiCronJob();
+sambaaiprefix_sambaAiCronJob();

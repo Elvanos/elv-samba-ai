@@ -1,13 +1,13 @@
 <?php
 
 
-function generateXML_products($ajaxMode = true) {
+function sambaaiprefix_generateXML_products($ajaxMode = true) {
 
   if (!is_plugin_active('woocommerce/woocommerce.php')) {
     return;
   }
 
-  function get_primary_category($post = 0) {
+  function sambaaiprefix_get_primary_category($post = 0) {
     $term_list = wp_get_post_terms($post, 'product_cat', array('fields' => 'ids'));
     $cat_id = (int)$term_list[0];
     return get_term($cat_id)->name;
@@ -22,7 +22,7 @@ function generateXML_products($ajaxMode = true) {
     ]
   );
 
-  function fixEncoding($input) {
+  function sambaaiprefix_fixEncoding($input) {
     $specialCharList = [
       ':' => '%3A',
       ';' => '%3B',
@@ -78,11 +78,11 @@ function generateXML_products($ajaxMode = true) {
     $xmlProduct->addChild('TITLE', htmlspecialchars($product->get_name()));
     $xmlProduct->addChild('PRICE', ($product->is_on_sale()) ? $product->get_sale_price() : $product->get_regular_price());
     $xmlProduct->addChild('PRICE_BEFORE_DISCOUNT', $product->get_regular_price());
-    $xmlProduct->addChild('URL', fixEncoding($product->get_permalink()));
-    $xmlProduct->addChild('IMAGE', fixEncoding(wp_get_attachment_image_url($product->get_image_id(), 'thumbnail')));
+    $xmlProduct->addChild('URL', sambaaiprefix_fixEncoding($product->get_permalink()));
+    $xmlProduct->addChild('IMAGE', sambaaiprefix_fixEncoding(wp_get_attachment_image_url($product->get_image_id(), 'thumbnail')));
     //$xmlProduct->addChild('BRAND', get_bloginfo('blogtitle'));
 
-    $catText = get_primary_category($product->get_id());
+    $catText = sambaaiprefix_get_primary_category($product->get_id());
     $xmlProduct->addChild('CATEGORYTEXT', $catText);
 
     // Poduct description - Content will be without html tags and limited to 100 characters

@@ -1,22 +1,20 @@
 <?php
 
-function getFullSiteName() {
-  $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ||
-    $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-  $domainName = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-  return $protocol . $domainName;
+function sambaaiprefix_getFullSiteName() {
+  $domainName = sanitize_url($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+  return $domainName;
 }
 // Action hooks
-add_action('admin_menu', 'sambaAiMenus');
+add_action('admin_menu', 'sambaaiprefix_sambaAiMenus');
 add_action('admin_enqueue_scripts', function () use ($pluginConfig) {
-  addAdminScript($pluginConfig);
+  sambaaiprefix_addAdminScript($pluginConfig);
 });
 add_action('admin_enqueue_scripts', function () use ($pluginConfig) {
-  addAdminStyle($pluginConfig);
+  sambaaiprefix_addAdminStyle($pluginConfig);
 });
 
 // Script loader
-function addAdminScript($pluginConfig) {
+function sambaaiprefix_addAdminScript($pluginConfig) {
 
   // Register the script
   wp_register_script('sambaAiaAdminControl', $pluginConfig['pluginURL'] . '/assets/js/dist/adminControl.dev.js', array('jquery'), $pluginConfig['pluginVersion']);
@@ -51,35 +49,35 @@ function addAdminScript($pluginConfig) {
 }
 
 // Style loader
-function addAdminStyle($pluginConfig) {
+function sambaaiprefix_addAdminStyle($pluginConfig) {
   wp_register_style('sambaAiaAdminStyle', $pluginConfig['pluginURL'] . '/assets/css/dist/adminStyle.css', false, $pluginConfig['pluginVersion']);
   wp_enqueue_style('sambaAiaAdminStyle', $pluginConfig['pluginURL'] . '/assets/css/dist/adminStyle.css', false, $pluginConfig['pluginVersion']);
 }
 
 // AJAX calls list
-add_action('wp_ajax_regeneratePasswordHash', 'regeneratePasswordHash');
+add_action('wp_ajax_sambaaiprefix_regeneratePasswordHash', 'sambaaiprefix_regeneratePasswordHash');
 
-add_action('wp_ajax_generateXML_customers', 'generateXML_customers');
-add_action('wp_ajax_generateXML_orders', 'generateXML_orders');
-add_action('wp_ajax_generateXML_products', 'generateXML_products');
-add_action('wp_ajax_generateXML_productsCategories', 'generateXML_productsCategories');
+add_action('wp_ajax_sambaaiprefix_generateXML_customers', 'sambaaiprefix_generateXML_customers');
+add_action('wp_ajax_sambaaiprefix_generateXML_orders', 'sambaaiprefix_generateXML_orders');
+add_action('wp_ajax_sambaaiprefix_generateXML_products', 'sambaaiprefix_generateXML_products');
+add_action('wp_ajax_sambaaiprefix_generateXML_productsCategories', 'sambaaiprefix_generateXML_productsCategories');
 
-add_action('wp_ajax_getTrialMode', 'getTrialMode');
-add_action('wp_ajax_setTrialMode', 'setTrialMode');
+add_action('wp_ajax_sambaaiprefix_getTrialMode', 'sambaaiprefix_getTrialMode');
+add_action('wp_ajax_sambaaiprefix_setTrialMode', 'sambaaiprefix_setTrialMode');
 
-add_action('wp_ajax_getSambaUserAnalyticsId', 'getSambaUserAnalyticsId');
-add_action('wp_ajax_setSambaUserAnalyticsId', 'setSambaUserAnalyticsId');
+add_action('wp_ajax_sambaaiprefix_getSambaUserAnalyticsId', 'sambaaiprefix_getSambaUserAnalyticsId');
+add_action('wp_ajax_sambaaiprefix_setSambaUserAnalyticsId', 'sambaaiprefix_setSambaUserAnalyticsId');
 
-add_action('wp_ajax_createWidget', 'createWidget');
-add_action('wp_ajax_updateWidget', 'updateWidget');
-add_action('wp_ajax_deleteWidget', 'deleteWidget');
+add_action('wp_ajax_sambaaiprefix_createWidget', 'sambaaiprefix_createWidget');
+add_action('wp_ajax_sambaaiprefix_updateWidget', 'sambaaiprefix_updateWidget');
+add_action('wp_ajax_sambaaiprefix_deleteWidget', 'sambaaiprefix_deleteWidget');
 
-add_action('wp_ajax_nopriv_retrieveWCCartContent', 'retrieveWCCartContent');
-add_action('wp_ajax_retrieveWCCartContent', 'retrieveWCCartContent');
+add_action('wp_ajax_nopriv_sambaaiprefix_retrieveWCCartContent', 'sambaaiprefix_retrieveWCCartContent');
+add_action('wp_ajax_sambaaiprefix_retrieveWCCartContent', 'sambaaiprefix_retrieveWCCartContent');
 
 
 // Admin page menu items
-function sambaAiMenus($pluginConfig) {
+function sambaaiprefix_sambaAiMenus($pluginConfig) {
 
   if (!is_plugin_active('woocommerce/woocommerce.php')) {
     return;
@@ -90,7 +88,7 @@ function sambaAiMenus($pluginConfig) {
     __('Samba.ai', 'samba-ai'),
     'manage_options',
     'samba-ai-admin-page',
-    'renderSambaAiPage',
+    'sambaaiprefix_renderSambaAiPage',
     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAAH6ji2bAAAACXBIWXMAAA7DAAAOwwHHb6hkAAABTUlEQVR4nGNgQAb/QaBN8/+/Gfr/Gbhlff6DMIN4OpKSP/vl/v/v0IZIw6X+HDH8D8O/jxhsBJl0G2YAu6wnAwhjB0AVp5C1/18VCnVIi/r//+1a//936kDcATMPxUwUV8IwSQBkFbID0PHPffraEAcBwcePXzDcgIxBClEcinCfMwMK5pL1IQrTCNy+/Qinj0FRgIgGAsEDMY7N6v/uu////5sJjK9WDXAigsXd/y5dsEJgKJyFm4gvDGHhiBGGWBUSFdggjF0hUqqB4QGOGSQAciK+sEeJtDPGDOgYAhQcOIiJSLyGI6WIWxtv/AdHNk4DjwLxcSg+isfQi3qQeAYZdvE7MPXAnDk3DJL7YSkJlppAGFj2gFMVNGX979aD4B59SIz+RwLYohwe9UCAK/URlaOxYaIMJNYwLlnvBUxaTQyEMNEJluiETW0DAdRcMnhFKRrBAAAAAElFTkSuQmCC'
   );
   add_submenu_page(
@@ -121,7 +119,7 @@ function sambaAiMenus($pluginConfig) {
 
 
 // Renderer
-function renderSambaAiPage($urlArray) {
+function sambaaiprefix_renderSambaAiPage($urlArray) {
 
   if (!is_plugin_active('woocommerce/woocommerce.php')) {
     return;
@@ -142,19 +140,19 @@ function renderSambaAiPage($urlArray) {
   $ordersLink = $loginDetails . 'sambaAiOrders.xml';
 
   // Analytics ID
-  $sambaUserID = getSambaUserAnalyticsId(false);
+  $sambaUserID = sambaaiprefix_getSambaUserAnalyticsId(false);
 
   // Widget list (ineffective to call it here, but it likely won't matter since it a very small DB)
-  $widgets = retrieveAllWidgets();
+  $widgets = sambaaiprefix_retrieveAllWidgets();
 
   // Tab management
   $default_tab = 'feeds';
-  $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
-  $widgettabid = isset($_GET['widgettabid']) ? $_GET['widgettabid'] : '';
+  $tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : $default_tab;
+  $widgettabid = isset($_GET['widgettabid']) ? sanitize_text_field($_GET['widgettabid']) : '';
 
 ?>
   <script>
-    window.sambaAicurrentlySelectedTab = '<?= $tab ?>'
+    window.sambaAicurrentlySelectedTab = '<?php echo esc_js($tab) ?>'
   </script>
 
   <style class="sambaToRemove">
@@ -200,7 +198,7 @@ function renderSambaAiPage($urlArray) {
         <label for="sambaAi_autoInputProducts">
           <h3><?php _e('Products feed link', 'samba-ai') ?></h3>
         </label>
-        <input type="text" id="sambaAi_autoInputProducts" class="sambaAi_autoInput" value="<?= $productsLink ?>" readonly>
+        <input type="text" id="sambaAi_autoInputProducts" class="sambaAi_autoInput" value="<?php echo esc_attr($productsLink) ?>" readonly>
         <br><br>
 
         <!-- 
@@ -208,22 +206,22 @@ function renderSambaAiPage($urlArray) {
             <?php _e('Products categories feed link', 'samba-ai') ?>
           </label>
           <br>
-          <input type="text" id="sambaAi_autoInputProductCategories" class="sambaAi_autoInput" value="<?= $productsCategoriesLink ?>" readonly>
+          <input type="text" id="sambaAi_autoInputProductCategories" class="sambaAi_autoInput" value="<?php echo esc_attr($productsCategoriesLink) ?>" readonly>
           <br><br> -->
 
         <label for="sambaAi_autoInputOrders">
           <h3><?php _e('Orders feed link', 'samba-ai') ?></h3>
         </label>
-        <input type="text" id="sambaAi_autoInputOrders" class="sambaAi_autoInput" value="<?= $ordersLink ?>" readonly>
+        <input type="text" id="sambaAi_autoInputOrders" class="sambaAi_autoInput" value="<?php echo esc_attr($ordersLink) ?>" readonly>
         <br><br>
 
         <label for="sambaAi_autoInputCustomers">
           <h3><?php _e('Customers feed link', 'samba-ai') ?></h3>
         </label>
-        <input type="text" id="sambaAi_autoInputCustomers" class="sambaAi_autoInput" value="<?= $customersLink ?>" readonly>
+        <input type="text" id="sambaAi_autoInputCustomers" class="sambaAi_autoInput" value="<?php echo esc_attr($customersLink) ?>" readonly>
         <br><br>
 
-        <input type="checkbox" <?= $trialMode ?> id="sambaAi_trialMode" class="js-setTrialMode"> <label for="sambaAi_trialMode" class="sambaAi_checkboxLabel">
+        <input type="checkbox" <?php echo esc_attr($trialMode) ?> id="sambaAi_trialMode" class="js-setTrialMode"> <label for="sambaAi_trialMode" class="sambaAi_checkboxLabel">
           <?php _e('Create data feeds only for 200 first customers (Samba trial mode)', 'samba-ai') ?>
         </label>
 
@@ -250,7 +248,7 @@ function renderSambaAiPage($urlArray) {
         <label for="sambaAi_userID">
           <h3><?php _e('Your Samba ID key', 'samba-ai') ?></h3>
         </label>
-        <input type="text" id="sambaAi_userID" class="sambaAi_autoInput sambaAi_userID js-saveUserID-value" value="<?= $sambaUserID ?>">
+        <input type="text" id="sambaAi_userID" class="sambaAi_autoInput sambaAi_userID js-saveUserID-value" value="<?php echo esc_attr($sambaUserID) ?>">
         <br><br>
         <button class="button button-primary button-large js-saveUserID-trigger">
           <?php _e('Save the ID key', 'samba-ai') ?>
@@ -284,15 +282,15 @@ function renderSambaAiPage($urlArray) {
               </th>
             </tr>
             <?php foreach ($widgets as $widget) { ?>
-              <tr class="sambaAi_widgetLine js-widgetLine" data-id="<?= $widget->id; ?>">
+              <tr class="sambaAi_widgetLine js-widgetLine" data-id="<?php echo esc_attr($widget->id); ?>">
                 <td>
-                  <?= $widget->name; ?>
+                  <?php echo esc_html($widget->name); ?>
                 </td>
                 <td>
-                  <input type="text" readonly value='[shwidget id="<?= $widget->id; ?>"]'>
+                  <input type="text" readonly value='[shwidget id="<?php echo esc_attr($widget->id); ?>"]'>
                 </td>
                 <td class="sambaAi_widgetControlTd">
-                  <a href="<?= getFullSiteName() . "&widgettabid=" . $widget->id; ?>">
+                  <a href="<?php echo esc_attr(sambaaiprefix_getFullSiteName() . "&widgettabid=" . $widget->id); ?>">
                     <button class="button button-primary button-medium">
                       <?php _e('Edit', 'samba-ai') ?>
                     </button>
@@ -316,23 +314,23 @@ function renderSambaAiPage($urlArray) {
 
 
         <?php if (!empty($widgettabid)) {
-          $widgetData = retrieveWidget(false, $widgettabid);
+          $widgetData = sambaaiprefix_retrieveWidget(false, $widgettabid);
         ?>
-          <div class="sambaAi_singleWidget js-singleWidget" data-id="<?= $widgetData->id; ?>">
+          <div class="sambaAi_singleWidget js-singleWidget" data-id="<?php echo esc_attr($widgetData->id); ?>">
             <div class="sambaAi_singleWidgetDuo">
-              <input type="text" readonly value='[shwidget id="<?= $widgetData->id; ?>"]' style="width:auto;">
+              <input type="text" readonly value='[shwidget id="<?php echo esc_attr($widgetData->id); ?>"]' style="width:auto;">
             </div>
             <div class="sambaAi_singleWidgetDuo">
               <label for="widgetname">
                 <h3><?php _e('Name', 'samba-ai') ?></h3>
               </label>
-              <input type="text" value="<?= $widgetData->name ?>" id="widgetname" name="widgetname" class="js-widgetUpdateName">
+              <input type="text" value="<?php echo esc_attr($widgetData->name) ?>" id="widgetname" name="widgetname" class="js-widgetUpdateName">
             </div>
             <div class="sambaAi_singleWidgetDuo">
               <label for="widgetcontent">
                 <h3><?php _e('Content', 'samba-ai') ?></h3>
               </label>
-              <textarea type="text" id="widgetcontent" name="widgetcontent" class="js-widgetUpdateContent"><?= $widgetData->content ?></textarea>
+              <textarea type="text" id="widgetcontent" name="widgetcontent" class="js-widgetUpdateContent"><?php echo stripslashes(esc_textarea($widgetData->content)) ?></textarea>
             </div>
 
             <div class="sambaAi_singleWidgetDuo -controlButtons">

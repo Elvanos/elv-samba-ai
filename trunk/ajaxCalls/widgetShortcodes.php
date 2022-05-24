@@ -1,6 +1,6 @@
 <?php
 
-function sambaAiShortcode($atts) {
+function sambaaiprefix_sambaAiShortcode($atts) {
 
   $id = $atts['id'];
 
@@ -10,8 +10,10 @@ function sambaAiShortcode($atts) {
 
   $retrievedWidget = $wpdb->get_row($wpdb->prepare("SELECT * FROM $tableName WHERE id = %d", $id));
 
-  // Unescape DB-friendly format
-  echo (str_replace("\\", "", $retrievedWidget->content));
+  // Fix DB-friendly format
+?>
+    <?php echo str_replace("\\", "", $retrievedWidget->content); ?>
+<?php
 }
 
-add_shortcode('shwidget', 'sambaAiShortcode');
+add_shortcode('shwidget', 'sambaaiprefix_sambaAiShortcode');

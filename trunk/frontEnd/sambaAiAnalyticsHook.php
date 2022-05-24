@@ -1,16 +1,14 @@
 <?php
 
-add_action('wp_head', 'sambaAiAnalyticsHook');
+add_action('wp_enqueue_scripts', 'sambaaiprefix_sambaAiAnalyticsHook');
 
-function sambaAiAnalyticsHook() {
+function sambaaiprefix_sambaAiAnalyticsHook() {
 
-  $userID = getSambaUserAnalyticsId(false);
+  $userID = sambaaiprefix_getSambaUserAnalyticsId(false);
 
   if ($userID === '') {
     return;
   }
 
-?>
-  <script src="https://yottlyscript.com/script.js?tp=<?= $userID ?>"></script>
-<?php
+  wp_enqueue_script('sambaaiprefix_sambaAiAnalyticsHook', 'https://yottlyscript.com/script.js?tp=' . esc_attr($userID));
 }

@@ -1,6 +1,6 @@
 <?php
 
-function generateXML_orders($ajaxMode = true) {
+function sambaaiprefix_generateXML_orders($ajaxMode = true) {
 
   if (!is_plugin_active('woocommerce/woocommerce.php')) {
     return;
@@ -51,7 +51,7 @@ function generateXML_orders($ajaxMode = true) {
           }
 
           $orderItemVariationID = $orderItem->get_variation_id();
-          $orderItemQuantity          = $orderItem->get_quantity();
+          $orderItemQuantity = $orderItem->get_quantity();
 
           array_push($filteredOrderItems, [
             'PRODUCT_ID' => $orderItemVariationID > 0 ? $orderItemVariationID : $orderItemID,

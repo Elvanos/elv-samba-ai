@@ -1,7 +1,7 @@
 <?php
-add_action('wp_head', 'sambaAiAnalytics_cartInteractionsTracking');
+add_action('wp_enqueue_scripts', 'sambaaiprefix_sambaAiAnalytics_cartInteractionsTracking');
 
-function sambaAiAnalytics_cartInteractionsTracking() {
+function sambaaiprefix_sambaAiAnalytics_cartInteractionsTracking() {
 
   $isCheckout = is_checkout() ? 'true' : 'false';
 
@@ -11,7 +11,7 @@ function sambaAiAnalytics_cartInteractionsTracking() {
 
   <!-- Start Samba.ai cart -->
   <script>
-    var isOrderPage = <?php echo $isCheckout; ?>;
+    var isOrderPage = <?php echo esc_js($isCheckout); ?>;
     var _yottlyOnload = _yottlyOnload || [];
     _yottlyOnload.push(function() {
 
@@ -19,8 +19,8 @@ function sambaAiAnalytics_cartInteractionsTracking() {
 
       <?php foreach ($orderItems as $item) { ?>
         products.push({
-          productId: '<?= $item['product_id'] ?>',
-          amount: <?= $item['quantity'] ?>
+          productId: '<?php echo esc_js($item['product_id']) ?>',
+          amount: <?php echo esc_js(absint($item['quantity'])) ?>
         });
       <?php } ?>
 
@@ -38,24 +38,24 @@ function sambaAiAnalytics_cartInteractionsTracking() {
       jQuery(document).ready(function() {
 
         jQuery('body').on('added_to_cart', function() {
-          reportCartStatusToSamba();
+          sambaaiprefix_reportCartStatusToSamba();
         });
 
         jQuery('body').on('removed_from_cart', function() {
-          reportCartStatusToSamba();
+          sambaaiprefix_reportCartStatusToSamba();
         });
 
 
         jQuery('body').on('updated_cart_totals', function() {
-          reportCartStatusToSamba();
+          sambaaiprefix_reportCartStatusToSamba();
         });
 
-        var reportCartStatusToSamba = function() {
+        var sambaaiprefix_reportCartStatusToSamba = function() {
           jQuery.ajax({
             type: 'POST',
-            url: "<?= admin_url('admin-ajax.php') ?>",
+            url: "<?php echo esc_js(admin_url('admin-ajax.php')) ?>",
             data: {
-              action: 'retrieveWCCartContent',
+              action: 'sambaaiprefix_retrieveWCCartContent',
             },
             success: function(response) {
 

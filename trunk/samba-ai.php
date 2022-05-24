@@ -10,7 +10,7 @@
  * Plugin Name:       Samba.ai
  * Plugin URI:        
  * Description:       Helps with connection to the Samba automation services
- * Version:           1.0.0
+ * Version:           1.1.1
  * Requires at least: 5.7.4
  * Requires PHP:      7.2
  * Author:            Cool Marketing
@@ -27,7 +27,7 @@ if (!defined('WPINC')) {
 }
 
 // Encapsulate our plugin's internals, because we aren't a band of savages
-function runSambaAi() {
+function sambaaiprefix_runSambaAi() {
 
   // Cleanup
   register_deactivation_hook(__FILE__, 'sambaAi_deactivate');
@@ -53,20 +53,20 @@ function runSambaAi() {
   ];
 
   // Plugin init
-  function loadTranslations() {
+  function sambaaiprefix_loadTranslations() {
     load_plugin_textdomain('samba-ai', false, dirname(plugin_basename(__FILE__)) . '/languages');
   }
-  add_action('init', 'loadTranslations');
+  add_action('init', 'sambaaiprefix_loadTranslations');
 
 
   // Check for requirements
   require_once  $pluginConfig['pluginDir'] . '/pluginRequirementsChecks/woocommerceCheck.php';
-  wooCommerceAutoCheck($pluginConfig);
+  sambaaiprefix_wooCommerceAutoCheck($pluginConfig);
 
   // Create plugin folder and setup security
   require_once  $pluginConfig['pluginDir'] . '/pluginRequirementsChecks/wpContentFolderCheck.php';
   require_once  $pluginConfig['pluginDir'] . '/pluginRequirementsChecks/wpContentFolderSecuritySetup.php';
-  wpContentFolderSecuritySetup(false);
+  sambaaiprefix_wpContentFolderSecuritySetup(false);
 
   // Check if trial version is hooked up and set up the appropriate option in the DB
   require_once  $pluginConfig['pluginDir'] . '/pluginRequirementsChecks/wpTrialModeSetup.php';
@@ -110,4 +110,4 @@ function runSambaAi() {
   require_once  $pluginConfig['pluginDir'] . '/frontEnd/sambaAiAnalytics_cartInteractionsTracking.php';
   require_once  $pluginConfig['pluginDir'] . '/frontEnd/sambaAiAnalytics_singleProductTracking.php';
 }
-runSambaAi();
+sambaaiprefix_runSambaAi();

@@ -1,8 +1,8 @@
 <?php
 
-add_action('wp_head', 'sambaAiAnalytics_singleProductTracking');
+add_action('wp_enqueue_scripts', 'sambaaiprefix_sambaAiAnalytics_singleProductTracking');
 
-function sambaAiAnalytics_singleProductTracking() {
+function sambaaiprefix_sambaAiAnalytics_singleProductTracking() {
 
 
   if (is_product()) {
@@ -15,7 +15,7 @@ function sambaAiAnalytics_singleProductTracking() {
       var _yottlyOnload = _yottlyOnload || [];
       _yottlyOnload.push(function() {
 
-        diffAnalytics.productId("<?= $productID ?>")
+        diffAnalytics.productId("<?php echo esc_js($productID) ?>")
 
       });
     </script>

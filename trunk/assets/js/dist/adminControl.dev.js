@@ -58,7 +58,7 @@ jQuery(function ($) {
             type: 'POST',
             url: ajaxurl,
             data: {
-              action: 'regeneratePasswordHash'
+              action: 'sambaaiprefix_regeneratePasswordHash'
             },
             success: function success(response) {
               triggerButton.removeAttr("disabled");
@@ -93,7 +93,7 @@ jQuery(function ($) {
             type: 'POST',
             url: ajaxurl,
             data: {
-              action: 'setTrialMode',
+              action: 'sambaaiprefix_setTrialMode',
               ajax_mode: true,
               value: triggerValue
             },
@@ -128,7 +128,7 @@ jQuery(function ($) {
             type: 'POST',
             url: ajaxurl,
             data: {
-              action: 'setSambaUserAnalyticsId',
+              action: 'sambaaiprefix_setSambaUserAnalyticsId',
               ajax_mode: true,
               value: triggerValue
             },
@@ -174,7 +174,7 @@ jQuery(function ($) {
             type: 'POST',
             url: ajaxurl,
             data: {
-              action: 'deleteWidget',
+              action: 'sambaaiprefix_deleteWidget',
               ajax_mode: true,
               value: toDeleteID
             },
@@ -215,7 +215,7 @@ jQuery(function ($) {
             type: 'POST',
             url: ajaxurl,
             data: {
-              action: 'createWidget',
+              action: 'sambaaiprefix_createWidget',
               ajax_mode: true
             },
             success: function success(response) {
@@ -252,7 +252,7 @@ jQuery(function ($) {
             type: 'POST',
             url: ajaxurl,
             data: {
-              action: 'updateWidget',
+              action: 'sambaaiprefix_updateWidget',
               ajax_mode: true,
               widget_id: wrapper.data('id'),
               name: wrapper.find('.js-widgetUpdateName').val(),
@@ -295,7 +295,7 @@ jQuery(function ($) {
           type: 'POST',
           url: ajaxurl,
           data: {
-            action: 'generateXML_products'
+            action: 'sambaaiprefix_generateXML_products'
           },
           success: function success() {
             exportReports.products = true;
@@ -319,7 +319,7 @@ jQuery(function ($) {
             type: 'POST',
             url: ajaxurl,
             data: {
-               action: 'generateXML_productsCategories',
+               action: 'sambaaiprefix_generateXML_productsCategories',
             },
             success: function () {
                exportReports.productCategories = true
@@ -342,7 +342,7 @@ jQuery(function ($) {
           type: 'POST',
           url: ajaxurl,
           data: {
-            action: 'generateXML_customers'
+            action: 'sambaaiprefix_generateXML_customers'
           },
           success: function success() {
             exportReports.customers = true;
@@ -365,7 +365,7 @@ jQuery(function ($) {
           type: 'POST',
           url: ajaxurl,
           data: {
-            action: 'generateXML_orders'
+            action: 'sambaaiprefix_generateXML_orders'
           },
           success: function success() {
             exportReports.orders = true;

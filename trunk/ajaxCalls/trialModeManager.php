@@ -1,12 +1,12 @@
 <?php
 
 
-function getTrialMode($ajaxMode = true) {
+function sambaaiprefix_getTrialMode($ajaxMode = true) {
 
   $trialModeState = get_option('sambaAiTrialMode');
 
   if ($ajaxMode) {
-    echo $trialModeState;
+    echo esc_textarea($trialModeState);
     die();
   } else {
     return $trialModeState;
@@ -17,17 +17,25 @@ function getTrialMode($ajaxMode = true) {
  * @param $ajaxMode boolean
  * @param $input 'non-checked' || 'checked'
  */
-function setTrialMode($ajaxMode = true, $input = 'non-checked') {
+function sambaaiprefix_setTrialMode($ajaxMode = true, $input = 'non-checked') {
 
   if (isset($_POST['ajax_mode'])) {
-    $ajaxMode = $_POST['ajax_mode'];
+    $ajaxMode = rest_sanitize_boolean($_POST['ajax_mode']);
   }
 
   if (isset($_POST['value'])) {
     $input = $_POST['value'];
   }
 
-  update_option('sambaAiTrialMode', $input);
+  // Check for 'non-checked' input
+  if ($input === 'non-checked') {
+    update_option('sambaAiTrialMode', 'non-checked');
+  }
+
+  // Check for 'checked' input
+  if ($input === 'checked') {
+    update_option('sambaAiTrialMode', 'checked');
+  }
 
   if ($ajaxMode) {
     die();

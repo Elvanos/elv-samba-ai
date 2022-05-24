@@ -1,8 +1,8 @@
 <?php
 
-add_action('wp_head', 'sambaAiAnalytics_loggedUserTracking');
+add_action('wp_enqueue_scripts', 'sambaaiprefix_sambaAiAnalytics_loggedUserTracking');
 
-function sambaAiAnalytics_loggedUserTracking() {
+function sambaaiprefix_sambaAiAnalytics_loggedUserTracking() {
 
   $loggedUserID = get_current_user_id();
 
@@ -19,8 +19,8 @@ function sambaAiAnalytics_loggedUserTracking() {
       var _yottlyOnload = _yottlyOnload || [];
       _yottlyOnload.push(function() {
 
-        diffAnalytics.customerLoggedIn('<?= $loggedUserID ?>')
-        diffAnalytics.submitPopupEmail('<?= $loggedUserEmail ?>', function(err, value) {
+        diffAnalytics.customerLoggedIn('<?php echo esc_js($loggedUserID) ?>')
+        diffAnalytics.submitPopupEmail('<?php echo esc_js($loggedUserEmail) ?>', function(err, value) {
           //console.log(value)
         })
       });

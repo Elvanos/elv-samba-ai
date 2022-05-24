@@ -6,7 +6,7 @@
  *
  * @return void
  */
-function wooCommerceAutoCheck($pluginConfig) {
+function sambaaiprefix_wooCommerceAutoCheck($pluginConfig) {
   add_action('admin_init', function () use ($pluginConfig) {
 
     // Advanced check for WP version with different message
@@ -14,7 +14,7 @@ function wooCommerceAutoCheck($pluginConfig) {
     if (!is_admin() || !current_user_can('activate_plugins') || !is_plugin_active('woocommerce/woocommerce.php') || version_compare($wcVersion, $pluginConfig['requiredWooCommerceVersion'], '<')) {
 
       add_action('admin_notices', function () use ($pluginConfig) {
-        wooCommerceTooOldNottice($pluginConfig);
+        sambaaiprefix_wooCommerceTooOldNottice($pluginConfig);
       });
     }
   });
@@ -25,7 +25,7 @@ function wooCommerceAutoCheck($pluginConfig) {
  *
  * @return void
  */
-function wooCommerceMissingNottice($pluginConfig) { ?>
+function sambaaiprefix_wooCommerceMissingNottice($pluginConfig) { ?>
   <div class="error">
     <p><?php _e('Samba.ai requires WooCommerce installed and activated.', 'samba-ai'); ?></p>
   </div>
@@ -36,7 +36,7 @@ function wooCommerceMissingNottice($pluginConfig) { ?>
  *
  * @return void
  */
-function wooCommerceTooOldNottice($pluginConfig) { ?>
+function sambaaiprefix_wooCommerceTooOldNottice($pluginConfig) { ?>
   <div class="error">
     <p><?php printf(
           _e('Samba.ai requires at least %s version of Woocommerce to run.', 'samba-ai'),

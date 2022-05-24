@@ -1,8 +1,8 @@
 <?php
 
-function wpTrialModeSetup() {
+function sambaaiprefix_wpTrialModeSetup() {
   if (!get_option('sambaAiTrialMode')) {
     add_option('sambaAiTrialMode', 'non-checked');
   }
 }
-wpTrialModeSetup();
+sambaaiprefix_wpTrialModeSetup();

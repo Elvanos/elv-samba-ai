@@ -1,7 +1,7 @@
 <?php
 
 
-function generateXML_customers($ajaxMode = true) {
+function sambaaiprefix_generateXML_customers($ajaxMode = true) {
 
   if (!is_plugin_active('woocommerce/woocommerce.php')) {
     return;
@@ -37,7 +37,7 @@ function generateXML_customers($ajaxMode = true) {
     ]
   ];
 
-  $trialMode = getTrialMode(false);
+  $trialMode = sambaaiprefix_getTrialMode(false);
 
   if ($trialMode == 'checked') {
     $userCount = 200;
@@ -71,7 +71,7 @@ function generateXML_customers($ajaxMode = true) {
 
   foreach ($tempUserList as $tempUser) {
     if ((!isset($tempUser['ID']) || $tempUser['ID'] == '') && (!isset($tempUser['meta']['billing_email']) || $tempUser['meta']['billing_email'] == '') && (!isset($tempUser['user_email']) || $tempUser['user_email'] == '')) {
-      echo '<pre>' . print_r($tempUser, true) . '</pre>';
+      echo esc_html('<pre>' . print_r($tempUser, true) . '</pre>');
       continue;
     }
 
