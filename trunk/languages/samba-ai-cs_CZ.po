@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Samba.ai 1.1.1\n"
+"Project-Id-Version: Samba.ai 1.1.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/samba-ai\n"
 "POT-Creation-Date: 2022-03-18T17:24:33+01:00\n"
 "PO-Revision-Date: 2022-04-19 23:02+0200\n"

@@ -1,13 +1,15 @@
-=== Samba.ai ===
+=== Samba.ai for WooCommerce ===
  
 Contributors: coolmarketing
-Tags: samba, samba.ai
+Tags: samba, samba.ai, samba.ai for woocommerce, woocommerce
 Requires at least: 5.5
 Tested up to: 5.9
 Requires PHP: 7.4
-Stable tag: 1.1.1
+Stable tag: 1.1.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Helps with connection to the Samba automation services.
 
 == Description ==
 
@@ -17,13 +19,13 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Don't waste your time and resources creating communication with customers, which misses the effect. Leave all the work to Samba and watch your orders pour in. Our artificial toucan works for you and can determine which products are best for each customer. He will handle all communication for you. He can send personalized emails, notify about abandoned carts, wish for the name day, send push notifications and SMS messages and much more. It combines all the other manual solutions available on the market and also runs on autopilot instead of you.
  
-Now with a single-click Shopify connector for free
+Now with a single-click WooCommerce connector for free
 
 = Made to make you money =
 
 Increase sales and order values with personalized campaigns content and websites, powered and created by artificial intelligence in one unified platform. Easy to use, no need to hire specialists.
 
-A go-to app for Shopify users
+A go-to app for WooCommerce users
 
 Get started quickly with seamless integration, prepared templates, and the essential email, Push notification and SMS tools to grow sales.
 
@@ -33,7 +35,7 @@ Not any limited trial or demo. Real free. Access 100% of Samba, and watch your s
  
 = About the app =
 
-Samba.ai is the first truly automated and AI-powered marketing platform which requires zero experience in online marketing. All you need to do is to connect your Shopify store and let Samba generate new orders for you!
+Samba.ai is the first truly automated and AI-powered marketing platform which requires zero experience in online marketing. All you need to do is to connect your WooCommerce store and let Samba generate new orders for you!
 
 It doesn't matter if you are a family-sized eshop or a market leader. Samba is used by everyone around the world.
 
@@ -91,6 +93,15 @@ Answer to the question
 Simply deactivate and delete the plugin. 
 
 == Changelog ==
+
+= 1.1.3 - 2022-25-05 =
+* Changed the plugin name to "Samba.ai for WooCommerce"
+* Added plugin miniature description for Wordpress repository
+* Changed/Added plugin tags
+* Added author URL
+
+= 1.1.2 - 2022-24-05 = 
+* Fixed password generator for PHP 7.4 and higher
 
 = 1.1.1 - 2022-30-04 = 
 * First Wordpress plugin directory distribution

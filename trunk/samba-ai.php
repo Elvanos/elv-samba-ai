@@ -1,20 +1,20 @@
 <?php
 
 /**
- * @package   Samba.ai
+ * @package   Samba.ai for WooCommerce
  * @author    Cool Marketing
  * @license   GPL-2.0+
  * @link      
  * @copyright 2022 Cool Marketing
  *
- * Plugin Name:       Samba.ai
+ * Plugin Name:       Samba.ai for WooCommerce
  * Plugin URI:        
  * Description:       Helps with connection to the Samba automation services
- * Version:           1.1.1
+ * Version:           1.1.3
  * Requires at least: 5.7.4
  * Requires PHP:      7.2
  * Author:            Cool Marketing
- * Author URI:        
+ * Author URI:        https://www.coolmarketing.cz
  * Text Domain:       samba-ai
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
@@ -48,7 +48,7 @@ function sambaaiprefix_runSambaAi() {
     'pluginBaseName' => 'samba-ai/samba-ai.php',
     'pluginURL' => plugin_dir_url(__FILE__),
     'pluginDir' => plugin_dir_path(__FILE__),
-    'pluginVersion' => '1.1.1',
+    'pluginVersion' => '1.1.3',
     'requiredWooCommerceVersion' => '4.0.0',
   ];
 
